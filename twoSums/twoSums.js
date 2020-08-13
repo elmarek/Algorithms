@@ -12,3 +12,17 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 
 */
+
+let twoSums = (array, target) => {
+  let sumPair = [];
+
+  for (var i = 0; i < array.length; i++) {
+    for (var j = i + 1; j < array.length; j++) {
+      if (nums[i] + nums[j] === target) {
+        sumPair.push(i);
+        sumPair.push(j);
+      }
+    }
+  }
+  return sumPair;
+};
