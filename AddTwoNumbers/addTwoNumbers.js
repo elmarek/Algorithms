@@ -24,22 +24,27 @@ var addTwoNumbers = function (l1, l2) {
   let numArray = [];
 
   // create function to traverse linked lists and add values to array
-  let traverser = (node) => {
+  var counter = 0;
+
+  let traverser = (ll) => {
     // counter variable to keep track of numArray index
-    let counter = 0;
-    while (node.next) {
-      if (numArray[counter] === undefined) {
-        numArray.push(node.value);
-      } else {
-        numArray[counter] = numArray[counter] + node.value;
-      }
-      counter++;
+
+    if (numArray[counter] === undefined) {
+      numArray.push(ll.val);
+    } else {
+      numArray[counter] = numArray[counter] + ll.val;
     }
+    if (ll.next === null) {
+      counter = 0;
+      return;
+    }
+    counter++;
+    traverser(ll.next);
   };
+
   // instantiate traverser function for each node value
   traverser(l1);
   traverser(l2);
-
   // iterate through the numArray checking for any values greater than 10
   // if value is greater than 10, carry over the remainder to next index
   for (var i = 0; i < numArray.length; i++) {
