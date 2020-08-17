@@ -26,16 +26,38 @@ var reorderLogFiles = function (logs) {
   let digits = [];
 
   for (var i = 0; i < logs.length; i++) {
-    let spaced = logs[i].split("");
+    let spaced = logs[i].split(" ");
 
-    if (!Number(spaced[5])) {
-      let array = spaced.join("");
-      letters.push(logs[i]);
+    if (!Number(spaced[1]) && Number(spaced[1]) !== 0) {
+      letters.push(spaced);
     } else {
-      let array = spaced.join("");
+      let array = spaced.join(" ");
       digits.push(array);
     }
   }
-  let result = letters.concat(digits);
+
+  let sortedLetters = letters.sort(function (a, b) {
+    for (var s = 1; s < a.length && s < b.length; s++) {
+      if (a[s] < b[s]) {
+        return -1;
+      }
+      if (a[s] > b[s]) {
+        return 1;
+      }
+    }
+    if (a[0] < b[0]) {
+      return -1;
+    }
+    if (a[0] > b[0]) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  for (var i = 0; i < sortedLetters.length; i++) {
+    sortedLetters[i] = sortedLetters[i].join(" ");
+  }
+  let result = sortedLetters.concat(digits);
   return result;
 };
