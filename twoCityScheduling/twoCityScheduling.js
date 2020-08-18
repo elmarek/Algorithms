@@ -1,0 +1,1 @@
+var twoCitySchedCost = function (costs) {};
