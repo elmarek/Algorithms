@@ -12,4 +12,47 @@ Output: 6
 
 */
 
-var trap = function (height) {};
+/*
+
+Example:
+
+Input: [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+
+*/
+
+var trap = function (height) {
+  // return value
+  let bucket = 0;
+
+  // traverse the heights
+  for (var i = 0; i < height.length; i++) {
+    // variable that contains trapped rain water
+    let trappedWater = 0;
+    let heighest = height[i]
+    let lowest = height[i]
+    for (var j = i + 1; j < height.length; j++) {
+
+      // when you hit a higher elevation: add the rain water to a bucket
+        // repeat process at the new highest elevation
+      if (height[j] >= height[i]) {
+        bucket += trappedWater
+          console.log(bucket, i, j)
+        i = j - 1
+        break;
+      }
+    // if the next elevation is lower than the starting elevation begin collecting rainwater
+      if (height[j] < height[i] || (height[j] < height[i] && height[j] > ) {
+        trappedWater += height[i] - height[j]
+      }
+    }
+  }
+  return bucket;
+};
+
+
+let Input = [0,1,0,2,1,0,1,3,2,1,2,1]
+
+let test = trap(Input)
+
+console.log(test)
