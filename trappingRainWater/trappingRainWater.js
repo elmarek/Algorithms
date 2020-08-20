@@ -29,9 +29,20 @@ var trap = function (height) {
   for (var i = 0; i < height.length; i++) {
     // variable that contains trapped rain water
     let trappedWater = 0;
+    let sunkenWell = false;
     let heighest = height[i]
     let lowest = height[i]
     for (var j = i + 1; j < height.length; j++) {
+     //edge case for 'sunken' rain well
+      if (height[i - 1] > height[i]) {
+        sunkenWell = true
+      }
+      if (sunkenWell) {
+        if (height[j] > heighest) {
+          heighest = height[j]
+        }
+      }
+
 
       // when you hit a higher elevation: add the rain water to a bucket
         // repeat process at the new highest elevation
@@ -49,6 +60,7 @@ var trap = function (height) {
   }
   return bucket;
 };
+
 
 
 let Input = [0,1,0,2,1,0,1,3,2,1,2,1]
