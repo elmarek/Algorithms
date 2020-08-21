@@ -53,7 +53,7 @@ var trap = function (height) {
         break;
       }
     // if the next elevation is lower than the starting elevation begin collecting rainwater
-      if (height[j] < height[i] || (height[j] < height[i] && height[j] > ) {
+      if (height[j] < height[i] || (height[j] < height[i] && height[j] > height[j]) {
         trappedWater += height[i] - height[j]
       }
     }
