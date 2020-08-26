@@ -21,20 +21,39 @@ function DoubleLinkedNode(key, val, left, right) {
  * @return {number}
  */
 LRUCache.prototype.get = function (key) {
+  console.log("GET DICTIONARY :", this.dict);
+
+  // if key does not exist
   if (!this.dict[key]) {
     return -1;
-  } else {
-    let previousHead = this.head;
-    this.head.left = this.dict[key];
-    previousHead.left = this.head;
-    // this.head = this.key.righ
-    // this.key.right.left = this.key.left
-    // this.key.right = this.head.right
-    // this.key.right = this.head.right
-    // this.key.left = this.head
-    // this.head.left = this.key
-    return this.dict[key].val;
   }
+
+  // otherwise
+  let foundNode = this.dict[key];
+
+  // if its already the head, return it and thats it!
+  if (foundNode === this.head) {
+    return foundNode.val;
+  }
+
+  let foundNodeLeft = foundNode.left;
+  let foundNodeRight = foundNode.right;
+
+  // if node is the tail reassign tail
+  if (foundNode === this.tail) {
+    foundNodeLeft.right = null;
+    this.tail = foundNodeLeft;
+    this.tail.right = null;
+  } else {
+    foundNodeLeft.right = foundNodeRight;
+    foundNodeRight.left = foundNodeRight;
+  }
+
+  this.head.left = foundNode;
+  foundNode.right = this.head;
+  foundNode.left = null;
+  this.head = foundNode;
+  return foundNode.val;
 };
 
 /**
@@ -43,49 +62,42 @@ LRUCache.prototype.get = function (key) {
  * @return {void}
  */
 LRUCache.prototype.put = function (key, val) {
-  if (!this.head.right.val) {
-    this.head.key = key;
+  if (this.dict[key] === this.head) {
     this.head.val = val;
-    this.dict[key] = new DoubleLinkedNode(key, val, null, null);
+    return;
+  }
+
+  let newNode = new DoubleLinkedNode(key, val, null, null);
+  // EDGE CASE - if it doesnt exist
+  if (this.dict[key] === undefined) {
+    newNode = new DoubleLinkedNode(key, val, null, null);
+  }
+
+  // if list is empty assign tail and head
+  if (this.size === 0) {
+    this.head = newNode;
+    this.tail = newNode;
+    this.dict[key] = newNode;
     this.size++;
     return;
   }
-  // if there is capacity and key does not exist
-  if (!this.dict.key && this.size < this.capacity) {
-    let previousHead = this.head;
-    this.tail.left;
-    let newNode = new DoubleLinkedNode(key, val, null, previousHead);
-    this.head = newNode;
-    previousHead.left = this.head;
-    this.head = newNode;
-    this.dict[key] = newNode;
-    console.log("DICT below cap :", Object.keys(this.dict));
-    this.size++;
-    // else if the key does not exist and cache is at max capacity
-  } else if (!this.dict.key && this.size === this.capacity) {
-    let newNode = new DoubleLinkedNode(key, val, null, this.head);
-    // assign current head left to new head
-    this.head.left = newNode;
-    //update head
-    this.head = newNode;
-    //remove last node
-    let lastNode = this.tail.left;
 
-    lastNode = this.tail;
-    this.tail.left = lastNode.left;
-    //console.log("TAIL :", this.tail.left)
-    this.tail.right = null;
-    let LastNodeKey = this.tail.key;
-    //delete last node from dictionary
-    console.log("List prior to delete : ", LastNodeKey);
-    delete this.dict[LastNodeKey];
-    // assign tail left to second to last node
-    console.log("DICT AFTER DELETE :", Object.keys(this.dict));
+  // if at capacity remove tail and delete the node from dict
+  if (this.size === this.capacity) {
+    let dictVal = this.tail.key;
     this.tail = this.tail.left;
-    this.dict[key] = newNode;
-    this.size++;
+    delete this.dict[dictVal];
+    this.size--;
   }
-  console.log("List :", this.head);
+
+  // add the new node to the head
+  let referencedHead = this.head;
+  this.head.left = newNode;
+  this.head = newNode;
+  this.head.right = referencedHead;
+  this.dict[key] = newNode;
+  this.size++;
+
   return;
 };
 
