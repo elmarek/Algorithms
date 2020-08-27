@@ -9,12 +9,13 @@ Note that an empty string is also considered valid.
 */
 
 var isValid = function (s) {
+  // Edge Cases
   if (s.length === 0) {
     return true;
   } else if (s.length === 1) {
     return false;
   }
-
+  // Reference Dictionary
   var dictionary = {
     "(": ")",
     "{": "}",
@@ -29,7 +30,7 @@ var isValid = function (s) {
   for (var i = 0; i < split.length; i++) {
     //iterate through ineer values
     for (var j = i + 1; j < split.length; j++) {
-      console.log(split);
+      // if the next are closing parens take them out of array
       if (
         dictionary[split[j]] &&
         dictionary[split[j]] === split[j + 1] &&
@@ -45,8 +46,7 @@ var isValid = function (s) {
 
     // if the next or last are closing parens take them out of array
     if (dictionary[split[i]] === split[i + 1] && split.length > 1) {
-      split.shift();
-      split.shift();
+      split.splice(i, 2);
       i--;
     } else if (
       dictionary[split[i]] === split[split.length - 1] &&
