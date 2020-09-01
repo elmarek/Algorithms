@@ -62,6 +62,7 @@ LRUCache.prototype.get = function (key) {
  */
 
 LRUCache.prototype.put = function (key, val) {
+  // if key is already the head update val
   if (this.dict[key] === this.head) {
     this.dict[key].val = val;
     return;
@@ -72,16 +73,20 @@ LRUCache.prototype.put = function (key, val) {
   // if it doesnt exist
   if (this.dict[key] === undefined) {
     newNode = new DoubleLinkedNode(key, val);
-  } else if (this.dict[key] && this.dict[key] !== this.head) {
-    // NEED collision case  !!!!!!!!!!!! LISA LOOK HERE
-    console.log(this.dict[key]);
-    // let foundNode = this.dict[key]
-    // let foundNodeLeft = foundNode.left
-    // console.log(foundNodeLeft)
-    // let foundNodeRight = foundNode.right
-    // foundNodeLeft.right = foundNodeRight
-    // foundNodeRight.left = foundNodeLeft
-    // this.size--
+    //  else collision case
+  } else if (this.dict[key] && this.dict[key] !== this.tail) {
+    let foundNode = this.dict[key];
+    let foundNodeLeft = foundNode.left;
+    let foundNodeRight = foundNode.right;
+    foundNodeLeft.right = foundNodeRight;
+    foundNodeRight.left = foundNodeLeft;
+    this.size--;
+    // else if key the tail
+  } else if (this.dict[key] && this.dict[key] === this.tail) {
+    let currentTail = this.dict[key];
+    this.tail = currentTail.left;
+    this.tail.right = null;
+    this.size--;
   }
 
   // if list is empty assign tail and head
@@ -95,7 +100,6 @@ LRUCache.prototype.put = function (key, val) {
 
   // if at capacity remove tail and delete the node from dict
   if (this.size === this.capacity) {
-    //  console.log(this.size, this.capacity, "Im in here!!!")
     let dictVal = this.tail.key;
     delete this.dict[dictVal];
     this.tail = this.tail.left;
@@ -112,10 +116,3 @@ LRUCache.prototype.put = function (key, val) {
 
   return;
 };
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
