@@ -36,4 +36,6 @@ All characters in words[i] and order are English lowercase letters.
  * @param {string} order
  * @return {boolean}
  */
-var isAlienSorted = function (words, order) {};
+var isAlienSorted = function (words, order) {
+  // return variable
+};
