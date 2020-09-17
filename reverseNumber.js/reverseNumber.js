@@ -30,7 +30,7 @@ var reverse = function (x) {
   if (result > Math.pow(2, 31) + 1 || result < -1 * Math.pow(2, 31)) {
     return 0;
   }
-
+  // return values
   if (isNegative) {
     return -1 * result;
   } else {
