@@ -26,7 +26,7 @@ var reverse = function (x) {
   x = Math.abs(x).toString();
   let number = x.split("").reverse().join("");
   let result = Number(number);
-
+  // Edge case if number is greater than 32 bit
   if (result > Math.pow(2, 31) + 1 || result < -1 * Math.pow(2, 31)) {
     return 0;
   }
