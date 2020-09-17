@@ -18,4 +18,22 @@ Assume we are dealing with an environment which could only store integers within
 
 */
 
-var reverse = function (x) {};
+var reverse = function (x) {
+  let isNegative = false;
+  if (x < 0) {
+    isNegative = true;
+  }
+  x = Math.abs(x).toString();
+  let number = x.split("").reverse().join("");
+  let result = Number(number);
+
+  if (result > Math.pow(2, 31) + 1 || result < -1 * Math.pow(2, 31)) {
+    return 0;
+  }
+
+  if (isNegative) {
+    return -1 * result;
+  } else {
+    return result;
+  }
+};
