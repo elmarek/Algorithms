@@ -11,6 +11,7 @@ function countStrings(s) {
   if (s.length === 0) {
     return 0;
   }
+
   // Write your code here
   // result counter variable
   let firstAndLastEquality = 0;
