@@ -21,3 +21,31 @@ Follow up:
 Could you solve it without converting the integer to a string?
 
 */
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  if (x < 0) {
+    return false;
+  }
+  x = x.toString();
+  array = x.split("");
+  if (array.length === 1) {
+    return true;
+  }
+
+  let isXPalindrome = true;
+
+  while (array.length > 1) {
+    if (array[0] === array[array.length - 1]) {
+      array.shift();
+      array.pop();
+    } else {
+      isXPalindrome = false;
+      break;
+    }
+  }
+  return isXPalindrome;
+};
