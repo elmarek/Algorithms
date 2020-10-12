@@ -40,6 +40,26 @@ Constraints:
 -231 <= nums[i] <= 231 - 1
 */
 
-var maxSubArray = function(nums) {
+let maxSubArray = function(nums) {
+  let maxSum = nums[0];
+  // iterate over the array
 
+if(nums.length > 1) {
+  for (var i = 0; i < nums.length; i++) {
+    let sum = nums[i]
+    if(sum > maxSum) {maxSum = sum }
+    for (var j = i + 1; j < nums.length; j++) {
+      // add up the adjacent values
+
+       sum += nums[j]
+       // if they are bigger than maxSum, update max sum and sub array
+       if(sum > maxSum) {
+        maxSum = sum
+
+        }
+      }
+    }
+  }
+
+  return maxSum
 };
