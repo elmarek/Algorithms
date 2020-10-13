@@ -27,5 +27,19 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 */
 
 var maxProfit = function(prices) {
+  let profit = -Infinity
 
+  for (var i = 0; i < prices.length; i++) {
+    let buyPrice = prices[i]
+    for (var j = i + 1; j < prices.length; j++) {
+      if ((prices[j] - buyPrice) > profit) {
+        profit = prices[j] - buyPrice
+      }
+    }
+  }
+  if (profit > 0) {
+    return profit
+  } else {
+      return 0
+  }
 };
