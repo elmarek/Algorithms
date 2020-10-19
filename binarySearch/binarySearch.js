@@ -29,4 +29,32 @@ The value of each element in nums will be in the range [-9999, 9999].
 
 var search = function(nums, target) {
 
+  let start = 0
+  let end = nums.length - 1
+  let midPoint = Math.floor((start + end) / 2)
+  let answer;
+
+  let recursor = (start, end, midPoint) => {
+      if (nums[midPoint] === target) {
+        answer = midPoint
+        return
+      }
+      if (start >= end) {
+          return
+      }
+      if (nums[midPoint] < target) {
+        recursor(midPoint + 1, end, (Math.floor(((midPoint + 1) + (end)) / 2 )))
+      }
+      if (nums[midPoint] > target) {
+        recursor(start, midPoint - 1, (Math.floor(((start) + (midPoint - 1)) / 2 )))
+      }
+  }
+
+  recursor(start, end, midPoint)
+
+  if (answer === undefined) {
+    return -1
+  } else {
+    return answer
+  }
 };
