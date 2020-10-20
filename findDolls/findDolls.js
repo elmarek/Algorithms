@@ -24,7 +24,7 @@ function findDolls(size) {
     // second loop to check whether box is half the size
     for (var j = i + 1; j < size.length; j++) {
       // if so remove the box and increase the counter
-      if (size[i] >= Math.max(size[j] * 2)) {
+      if (size[i] >= size[j] * 2) {
         size.splice(j, 1);
         break;
       }
