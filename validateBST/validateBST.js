@@ -50,5 +50,31 @@ Explanation: The root node's value is 5 but its right child's value is 4.
 
 
 var isValidBST = function(root) {
+  // Return value
+  let isValid = true
 
+  let recursor = (node) => {
+    // if there is no node: return
+    if (!node){return}
+
+    //check that left is smaller && right is larger than this.val
+    if (node.left.val && node.val > node.left.val) {
+      recursor(node.left)
+    } else {
+      isValid = false
+      return
+    }
+
+    if (node.right.val && node.val < node.right.val) {
+      recursor(node.right)
+    } else {
+      isValid = false
+      return
+    }
+
+  }
+
+  recursor(root)
+
+  return isValid
 };
