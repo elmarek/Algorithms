@@ -12,28 +12,38 @@
  * @return {boolean}
  */
 
-/* 112. Path Sum
-https://leetcode.com/problems/path-sum/
-
-Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
-
-Note: A leaf is a node with no children.
-
-Example:
-
-Given the below binary tree and sum = 22,
-
-      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1
-return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
-*/
+// input is a node; represents top of a tree && and integer representing a target sum
+// output is a boolean representing whether the sum can be found in a path tree
 
 
 var hasPathSum = function(root, sum) {
+  if(!root) {return false}
+
+  // create a variable that is a boolean that is equal to false
+  let result = false
+
+  // recursive function to sum values down tree path
+  let pathSumHelper = (node, aggregator) => {
+     // base case
+      console.log(aggregator)
+      if (!node) {
+          return
+      }
+      if((!node.left) && (!node.right) && aggregator + node.val === sum) {
+          result = true
+          return
+      }
+
+   pathSumHelper(node.left, node.val + aggregator)
+   pathSumHelper(node.right, node.val + aggregator)
+
+}
+
+  // Initialize recursive function
+  pathSumHelper(root, 0)
+
+  // Return result
+  return result
 
 };
+
