@@ -33,7 +33,6 @@ var hasPathSum = function(root, sum) {
           result = true
           return
       }
-
    pathSumHelper(node.left, node.val + aggregator)
    pathSumHelper(node.right, node.val + aggregator)
 
