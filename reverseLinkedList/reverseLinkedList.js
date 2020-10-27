@@ -29,14 +29,10 @@ var reverseList = function(head) {
   if(!head){
       return null
   }
-  let values = []
+  let LL
   while(head) {
-      values.push(head.val)
+      LL = new ListNode(head.val, LL)
       head = head.next
-  }
-  let LL;
-  for (var i = 0; i < values.length; i++) {
-      LL = new ListNode(values[i], LL)
   }
   return LL
 };
