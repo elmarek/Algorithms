@@ -16,9 +16,14 @@
 
 var spiralTraversal = function(matrix) {
 
-  // TODO: Implement me!
+  let result = [];
+  let startRow = 0
+  let endRow = matrix.length - 1
+  let startCol = 0
+  let endCol = matrix[0].length - 1
 
-  let rowLength = matrix[0].length()
-  let rowCount = matrix.length()
-  
+  while(startRow <= endRow && startCol <= endCol) {
+
+  }
+
 };
