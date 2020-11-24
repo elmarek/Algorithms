@@ -14,16 +14,49 @@
     returns [1, 2, 3, 6, 9, 8, 7, 4, 5]
  */
 
-var spiralTraversal = function(matrix) {
+var spiralTraversal = function (matrix) {
+  function spiralTraverse(array) {
+    let result = [];
 
-  let result = [];
-  let startRow = 0
-  let endRow = matrix.length - 1
-  let startCol = 0
-  let endCol = matrix[0].length - 1
+    let startColumn = 0;
+    let endColumn = array[0].length - 1;
+    let startRow = 0;
+    let endRow = array.length - 1;
 
-  while(startRow <= endRow && startCol <= endCol) {
+    while (startColumn <= endColumn && startRow <= endRow) {
+      console.log("startColumn :", startColumn, " Endcolumn :", endColumn);
+      console.log("StartRow :", startRow, " EndRow :", endRow);
 
+      for (var i = startColumn; i <= endColumn; i++) {
+        console.log("first loop ", array[startRow][i]);
+        result.push(array[startRow][i]);
+      }
+      //Edge case when number of rows is even
+      if (startRow === endRow) {
+        break;
+      }
+      for (var j = startRow + 1; j <= endRow; j++) {
+        console.log("second loop ", array[j][endColumn]);
+        result.push(array[j][endColumn]);
+      }
+      //Edge case when number of columns is even
+      if (startColumn === endColumn) {
+        break;
+      }
+      for (var k = endColumn - 1; k >= startColumn; k--) {
+        console.log("third loop ", array[endRow][k]);
+        result.push(array[endRow][k]);
+      }
+      for (var p = endRow - 1; p > startRow; p--) {
+        console.log("last loop ", array[p][startColumn]);
+        result.push(array[p][startColumn]);
+      }
+      console.log("Array so far is :", result);
+      startColumn++;
+      endColumn--;
+      startRow++;
+      endRow--;
+    }
+    return result;
   }
-
 };
