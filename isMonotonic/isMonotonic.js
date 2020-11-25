@@ -30,7 +30,6 @@ function isMonotonic(array) {
       return false;
     }
   }
-  console.log(equal, increasing, decreasing);
   if (increasing === true && !decreasing) {
     return true;
   }
