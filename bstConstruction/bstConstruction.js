@@ -1,3 +1,5 @@
+// Algo Expert prompt
+
 class BST {
   constructor(value) {
     this.value = value;
