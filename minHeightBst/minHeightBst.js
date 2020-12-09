@@ -3,7 +3,7 @@ function minHeightBst(array) {
   return constructMinHeightBst(array, null, 0, array.length - 1);
 }
 function constructMinHeightBst(array, bst, startIdx, endIdx) {
-  if (startIdx < endIdx) {
+  if (endIdx < startIdx) {
     return;
   }
   const midIdx = Math.floor((startIdx + endIdx) / 2);
