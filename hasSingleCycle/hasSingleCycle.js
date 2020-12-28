@@ -1,5 +1,4 @@
 function hasSingleCycle(array) {
-  // Write your code here.
   let jumps = 0;
   let startingIndex = 0;
   let currentIndex = 0;
