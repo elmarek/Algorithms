@@ -16,9 +16,9 @@ pyramid_sample_input.txt pyramid_sample_output.txt
 
 */
 
-`I think that for this puzzle, a tree data structure will be the most helpful for us in finding the path we are looking for.
+`I think that for this puzzle, a tree data structure will give us a great way to organize our numbers, traverse them in a left and right fashion, and determine whether the product of a path equals our target.
 
-As we go down the tree, starting at the first node, we will want to save all the left or right moves we make.
+Starting at the first node, we will want to traverse all available paths. For each path we will want to save any left or right move that we make.
 
 Once we get to the end of a path, if the numbers we come across are a product equal to the target, we return the saved left and right moves as our output.`;
 
