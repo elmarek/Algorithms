@@ -15,3 +15,15 @@ Sample Input & output files:
 pyramid_sample_input.txt pyramid_sample_output.txt
 
 */
+
+`I think that for this puzzle, a tree data structure will be the most helpful for us in finding the path we are looking for.
+
+As we go down the tree, starting at the first node, we will want to save all the left or right moves we make.
+
+Once we get to the end of a path, if the numbers we come across are a product equal to the target, we return the saved left and right moves as our output.`;
+
+let pyramidDescent = (node, target) => {
+  // start at the first node
+  // start going down the left of the tree
+  // include
+};
